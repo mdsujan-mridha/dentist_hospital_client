@@ -1,7 +1,8 @@
 import React from 'react';
 
-const AppointmentCard = ({timeSlot}) => {
-   const{name,slots} = timeSlot;
+const AppointmentCard = ({ timeSlot, setTreatment }) => {
+    const { name, slots } = timeSlot;
+    
 
     return (
         <section>
@@ -10,16 +11,20 @@ const AppointmentCard = ({timeSlot}) => {
                     <h2 class="text-center mt-5 font-bold text-3xl text-secondary"> {name} </h2>
                     <p className='text-center'>
                         {
-                            slots.length >0
-                            ?
-                            <span>{slots[0]} </span>
-                            :
-                            <span className='text-red-500'> No slot available </span>
+                            slots.length > 0
+                                ?
+                                <span className='font-medium
+                            '>{slots[0]} </span>
+                                :
+                                <span className='text-red-500 font-medium'> No slot available </span>
                         }
                     </p>
                     <p className='text-center font-bold'> {slots.length} {slots.length > 1 ? "spaces" : "space"}  available </p>
                     <div class="card-actions mt-5">
-                        <button disabled={slots.length === 0} className='h-11 text-white text-center font-bold w-72 border rounded-lg bg-secondary'>Book Now</button>
+                        <label
+                            for="booking-modal-3" 
+                            onClick={() => setTreatment(timeSlot)}
+                            class="h-12 text-white flex justify-center items-center font-bold w-72 border rounded-lg bg-secondary">Book Now</label>
                     </div>
                 </div>
             </div>
