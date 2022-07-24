@@ -24,13 +24,12 @@ const BookingModal = ({ selected, treatment }) => {
                            {
                                    slots.map(slot => <option value={slot}> {slot} </option>)
                            }
-                            
                         </select>
                         <input type="text" placeholder="Full name" class="input input-bordered w-full max-w-xs" />
                         <input type="number" placeholder="Phone number" class="input input-bordered w-full max-w-xs" />
                         <input type="text" placeholder="Email" class="input input-bordered w-full max-w-xs" />
 
-                        <input value="submit" class="input input-bordered w-full max-w-xs bg-secondary text-white text-center text-lg font-semibold" />
+                        <input className='input input-bordered w-full max-w-xs bg-secondary text-white text-center text-lg font-semibold' type="submit" value="submit" />
                     </form>
                 </div>
             </div>
