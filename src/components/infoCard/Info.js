@@ -7,7 +7,7 @@ import phone from "../assets/icons/phone.svg";
 const Info = () => {
     const cardDetails = [
         {
-            "id": '1',
+            "_id": '1',
 
             "img": clock,
             "title": "Opening Hours",
@@ -15,7 +15,7 @@ const Info = () => {
             "background": "bg-gradient-to-r from-secondary to-primary"
         },
         {
-            "id": '2',
+            "_id": '2',
 
             "img": marker,
             "title": "Visit our location",
@@ -23,7 +23,7 @@ const Info = () => {
             "background": "bg-accent"
         },
         {
-            "id": '3',
+            "_id": '3',
 
             "img": phone,
             "title": "Contact us now",
@@ -35,7 +35,7 @@ const Info = () => {
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-3 pb-5'>
            {
             cardDetails.map(card => <InfoCard
-             id = {card.id}
+             id = {card._id}
              card = {card}
             ></InfoCard> )
            }

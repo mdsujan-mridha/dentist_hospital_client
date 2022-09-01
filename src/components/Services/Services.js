@@ -7,19 +7,19 @@ import whitening from "../assets/images/whitening.png";
 const Services = () => { 
     const servicesInfo = [
         {
-            "id": "1",
+            "_id": "1",
             "img":florida,
             "title":"Fluoride Treatment",
             "content": "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the"
         },
         {
-            "id": "2",
+            "_id": "2",
             "img": cavity,
             "title":"Cavity Filling",
             "content": "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the"
         },
         {
-            "id": "3",
+            "_id": "3",
             "img": whitening,
             "title":"Teeth Whitening",
             "content": "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the"
@@ -34,7 +34,7 @@ const Services = () => {
            <div className='place-items-center mt-14 grid grid-cols-1 lg:grid-cols-3 gap-5'>
               {
                 servicesInfo.map(service => <ServicesCard
-                id ={ service.id}
+                id ={ service._id}
                 service = {service}
                 ></ServicesCard>)
               }

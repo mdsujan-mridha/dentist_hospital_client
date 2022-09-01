@@ -1,5 +1,5 @@
 [
-    {    "id":"1",  
+    {   
         "name":"Teeth Orthodontics",
         "slots":[
             "8:00 Am - 8:30 Am",
@@ -14,7 +14,7 @@
      
     },
 
-    {    "id":"2",
+    {    
         "name":"Cosmetic Dentistry",
         "slots":[
             
@@ -32,8 +32,8 @@
             "10:30 Am - 11:00 Am",
             "11:00 Am - 11:30 Am",
             "11:30 Am - 12:00 Am"
-        ],
-      "id":"3"  
+        ]
+  
     },
     {
         "name":"Teeth Orthodontics",
@@ -46,8 +46,8 @@
             "10:30 Am - 11:00 Am",
             "11:00 Am - 11:30 Am",
             "11:30 Am - 12:00 Am"
-        ],
-      "id":"4"  
+        ]
+  
     },
     {
         "name":"Teeth Orthodontics",
@@ -60,8 +60,8 @@
             "10:30 Am - 11:00 Am",
             "11:00 Am - 11:30 Am",
             "11:30 Am - 12:00 Am"
-        ],
-      "id":"5"  
+        ]
+     
     },
     {
         "name":"Teeth Orthodontics",
@@ -74,7 +74,7 @@
             "10:30 Am - 11:00 Am",
             "11:00 Am - 11:30 Am",
             "11:30 Am - 12:00 Am"
-        ],
-      "id":"6"  
+        ]
+   
     }
 ]

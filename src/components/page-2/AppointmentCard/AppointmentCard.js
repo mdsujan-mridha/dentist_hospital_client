@@ -1,5 +1,4 @@
 import React from 'react';
-
 const AppointmentCard = ({ timeSlot, setTreatment }) => {
     const { name, slots } = timeSlot;
     
@@ -22,7 +21,9 @@ const AppointmentCard = ({ timeSlot, setTreatment }) => {
                     <p className='text-center font-bold'> {slots.length} {slots.length > 1 ? "spaces" : "space"}  available </p>
                     <div class="card-actions mt-5">
                         <label
+                           
                             for="booking-modal-3" 
+                            hidden = {slots.length===0}
                             onClick={() => setTreatment(timeSlot)}
                             class="h-12 text-white flex justify-center items-center font-bold w-72 border rounded-lg bg-secondary">Book Now</label>
                     </div>
