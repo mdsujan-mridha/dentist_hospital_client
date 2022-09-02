@@ -1,14 +1,57 @@
 import React from 'react';
 import { format } from 'date-fns';
-const BookingModal = ({ selected, treatment }) => {
-    const { name,slots } = treatment;
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../../firebase.init';
+import Loading from '../../../optional/Loading';
+import {toast } from 'react-toastify';
+
+const BookingModal = ({selected, treatment,setTreatment }) => {
+    const { _id,name,slots } = treatment;
+    const[user,loading,error] = useAuthState(auth);
+    const formattedDate = format(selected,'PP');
+    // note 
+    // here date = selected
+    if(loading){
+        return <Loading/>
+    }
+    if(error){
+        console.log(error);
+    }
     
-
-
      const handleBooking = e =>{
         e.preventDefault();
          const getBookingTime = e.target.slot.value;
-         console.log(getBookingTime);
+
+        const booking = {
+            treatmentId:_id,
+            treatment:name,
+            date:formattedDate,
+            getBookingTime,
+            patientEmail:user?.email,
+            patientName:user?.displayName,
+            phoneNumber:e.target.value,
+
+         }
+
+         fetch('http://localhost:5000/booking',{
+            method:'POST',
+            headers:{
+                'content-type':'application/json'
+            },
+            body:JSON.stringify(booking)
+         })
+          .then(res =>res.json())
+           .then(data => {
+            console.log(data)
+             if(data.success){
+                toast(`Appointment is set ,${formattedDate} at${getBookingTime}`)
+             }
+             else{
+                toast(` You already have and Appointment is ,${formattedDate} at${getBookingTime}`)
+             }
+            setTreatment(null);
+           })
+         
      }
     return (
         <div>
@@ -25,9 +68,10 @@ const BookingModal = ({ selected, treatment }) => {
                                    slots.map(slot => <option value={slot}> {slot} </option>)
                            }
                         </select>
-                        <input type="text" placeholder="Full name" class="input input-bordered w-full max-w-xs" />
+                        <input type="text" disabled value={user?.displayName || ''} class="input input-bordered w-full max-w-xs" />
+                        <input type="text" value={user?.email || ''} class="input input-bordered w-full max-w-xs" />
                         <input type="number" placeholder="Phone number" class="input input-bordered w-full max-w-xs" />
-                        <input type="text" placeholder="Email" class="input input-bordered w-full max-w-xs" />
+                        
 
                         <input className='input input-bordered w-full max-w-xs bg-secondary text-white text-center text-lg font-semibold' type="submit" value="submit" />
                     </form>

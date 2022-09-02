@@ -1,6 +1,6 @@
 import React from 'react';
 import auth from '../../../firebase.init';
-import { useSignInWithGoogle, useSignInWithGithub, useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub, useCreateUserWithEmailAndPassword,useUpdatePassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
@@ -19,25 +19,28 @@ const Register = () => {
         loading2,
         error2,
     ] = useCreateUserWithEmailAndPassword(auth);
+    // update user profile 
+    const [updatePassword, updating, error3] = useUpdatePassword(auth);
     // react form 
     const { register, formState: { errors }, handleSubmit } = useForm();
-
-    const onSubmit = data => {
-        createUserWithEmailAndPassword(data.email,data.password);
+    // handle submit 
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email,data.password);
+        await updatePassword({displayName:data.name});
         console.log(data)
 
     }
     //  handle Loading 
-    if (loading || loading1 || loading2) {
+    if (loading || loading1 || loading2 || updating) {
         return <Loading />
     }
     //   handle error 
     let errorElement;
-    if (error || error1 || error2) {
+    if (error || error1 || error2 ||error3) {
         errorElement = <div class="alert alert-error shadow-lg">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>{error?.message || error1?.message || error2?.message } </span>
+                <span>{error?.message || error1?.message || error2?.message || error3?.message } </span>
             </div>
         </div>
     }

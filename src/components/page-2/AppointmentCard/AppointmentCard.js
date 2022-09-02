@@ -22,10 +22,11 @@ const AppointmentCard = ({ timeSlot, setTreatment }) => {
                     <div class="card-actions mt-5">
                         <label
                            
-                            for="booking-modal-3" 
-                            hidden = {slots.length===0}
+                            htmlFor="booking-modal-3" 
+                            disabled={slots.length === 0}
                             onClick={() => setTreatment(timeSlot)}
-                            class="h-12 text-white flex justify-center items-center font-bold w-72 border rounded-lg bg-secondary">Book Now</label>
+                            class="h-12 text-white flex justify-center items-center font-bold w-72 border rounded-lg bg-secondary">Book Now
+                            </label>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Appointment from '../Appointment/Appointment';
+import Appointment from '../MakeAppointment/MakeAppointment';
 import Banner from '../Banner/Banner';
 import Care from '../Care/Care';
 import Footer from '../Footer/Footer';
@@ -7,6 +7,7 @@ import HomeContact from '../HomeContact/HomeContact';
 import Info from '../infoCard/Info';
 import Services from '../Services/Services';
 import Testimonial from '../Testimonial/Testimonial';
+import MakeAppointment from "../MakeAppointment/MakeAppointment";
 
 
 const Home = () => {
@@ -16,7 +17,7 @@ const Home = () => {
             <Info></Info>
             <Services></Services>
             <Care></Care>
-            <Appointment></Appointment>
+            <MakeAppointment></MakeAppointment>
             <Testimonial></Testimonial>
             <HomeContact></HomeContact>
             <Footer></Footer>

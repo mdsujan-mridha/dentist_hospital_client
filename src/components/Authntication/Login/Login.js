@@ -3,6 +3,7 @@ import auth from '../../../firebase.init';
 import { useSignInWithGoogle, useSignInWithGithub, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import Loading from '../../../optional/Loading';
@@ -14,6 +15,9 @@ const Login = () => {
     const [signInWithGithub, user1, loading1, error1] = useSignInWithGithub(auth);
     // react form 
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location?.state?.form?.pathname || "/";
 
     // sign in with email and password 
     const [
@@ -32,6 +36,10 @@ const Login = () => {
     if (loading || loading1 || loading2) {
         return <Loading />
     }
+    // replace after get login 
+     if(user || user1 || user2){
+         navigate(from,{replace: true});
+     }
     // handle error 
    let errorElement;
     if (error || error1 || error2) {
