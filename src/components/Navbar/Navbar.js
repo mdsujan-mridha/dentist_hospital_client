@@ -24,6 +24,9 @@ const Navbar = () => {
     <li> <Link to="/appointment"> Appointment </Link> </li>
     <li> <Link to="/contact"> Contact </Link> </li>
     <li> <Link to="/review"> Review </Link> </li>
+     {
+      user && <li> <Link to="/dashboard"> Dashboard </Link> </li>
+     }
     {
       user ?
         <>
@@ -56,7 +59,9 @@ const Navbar = () => {
             {navMenu}
           </ul>
         </div>
-
+             <div className="navBarEnd">
+             <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Dashboard</label>
+             </div>
       </div>
 
 

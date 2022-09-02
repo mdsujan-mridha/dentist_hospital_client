@@ -5,7 +5,7 @@ import auth from '../../../firebase.init';
 import Loading from '../../../optional/Loading';
 import {toast } from 'react-toastify';
 
-const BookingModal = ({selected, treatment,setTreatment }) => {
+const BookingModal = ({selected, treatment,setTreatment,refetch }) => {
     const { _id,name,slots } = treatment;
     const[user,loading,error] = useAuthState(auth);
     const formattedDate = format(selected,'PP');
@@ -25,7 +25,7 @@ const BookingModal = ({selected, treatment,setTreatment }) => {
         const booking = {
             treatmentId:_id,
             treatment:name,
-            date:formattedDate,
+            selected:formattedDate,
             getBookingTime,
             patientEmail:user?.email,
             patientName:user?.displayName,
@@ -49,6 +49,7 @@ const BookingModal = ({selected, treatment,setTreatment }) => {
              else{
                 toast(` You already have and Appointment is ,${formattedDate} at${getBookingTime}`)
              }
+             refetch();
             setTreatment(null);
            })
          
