@@ -15,6 +15,11 @@ import DashBoard from './components/page-3/DashBoard/DashBoard';
 import Footer from './components/Footer/Footer';
 import MyAppointMent from './components/page-3/DashBoard/MyAppointMent';
 import MyReview from './components/page-3/DashBoard/MyReview';
+import MyHistory from './components/page-3/DashBoard/MyHistory';
+import Allusers from './components/page-3/DashBoard/Allusers';
+import RequireAmin from './components/Authntication/RequireAuth/RequireAdmin';
+import AddDoctors from './components/page-3/DashBoard/AddDoctor/AddDoctors';
+import ManageDoctors from './components/page-3/DashBoard/ManageDoctors/ManageDoctors';
 
 function App() {
   return (
@@ -38,6 +43,18 @@ function App() {
         }>
           <Route index element={<MyAppointMent/>}> </Route>  
           <Route path='myreview' element={<MyReview/>}> </Route>  
+          <Route path='history' element={<MyHistory/>}> </Route>  
+          <Route path='users' element={
+          <RequireAmin>
+            <Allusers/>
+          </RequireAmin>}
+          > </Route>
+          <Route path='manageDoctors' element={
+          <RequireAmin>
+            <ManageDoctors/>
+          </RequireAmin>}
+          > </Route>
+          <Route path='addDoctor' element={<AddDoctors/>}></Route>  
         </Route>
   
       </Routes>

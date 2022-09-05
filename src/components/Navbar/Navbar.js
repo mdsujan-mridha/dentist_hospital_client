@@ -14,9 +14,10 @@ const Navbar = () => {
     console.log(error);
     
    }
-  console.log(user);
+  
   const logout = () => {
     signOut(auth);
+    localStorage.removeItem('accessToken');
   };
   const navMenu = <>
     <li> <Link to="/"> Home </Link> </li>

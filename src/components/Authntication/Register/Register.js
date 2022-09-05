@@ -1,11 +1,13 @@
 import React from 'react';
 import auth from '../../../firebase.init';
-import { useSignInWithGoogle, useSignInWithGithub, useCreateUserWithEmailAndPassword,useUpdatePassword } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub, useCreateUserWithEmailAndPassword,useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import Loading from '../../../optional/Loading';
+import useToken from '../../../hooks/useToken';
+
 
 const Register = () => {
     // sign in with gmail 
@@ -19,15 +21,20 @@ const Register = () => {
         loading2,
         error2,
     ] = useCreateUserWithEmailAndPassword(auth);
+    // handle token 
+    const[token] = useToken( user || user1 || user2 );
+
     // update user profile 
-    const [updatePassword, updating, error3] = useUpdatePassword(auth);
+    const [updateProfile, updating, error3] = useUpdateProfile(auth);
     // react form 
     const { register, formState: { errors }, handleSubmit } = useForm();
+     
+    const navigate = useNavigate();
     // handle submit 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email,data.password);
-        await updatePassword({displayName:data.name});
-        console.log(data)
+        await updateProfile({displayName:data.name});
+        
 
     }
     //  handle Loading 
@@ -44,9 +51,14 @@ const Register = () => {
             </div>
         </div>
     }
-    if(user2){
-        console.log(user2);
-    }
+    
+    //  handle navigate 
+     if(token){
+        navigate("/appointment");
+     }
+
+
+
     return (
         <section className='flex justify-center items-center h-screen'>
             <div class="card w-96 bg-base-100 shadow-xl">
@@ -122,6 +134,7 @@ const Register = () => {
                            <p className='my-2'> {errorElement} </p> 
                         <input type="submit" value='Sign up' className='input input-bordered w-full max-w-xs btn btn-primary text-white text-lg font-semibold' />
                     </form>
+                    
                     <div className='flex justify-between'>
 
                         <button class="btn btn-link text-black capitalize"> <Link to='/login'> Already Have an Account? </Link> </button>

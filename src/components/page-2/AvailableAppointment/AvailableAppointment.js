@@ -23,6 +23,7 @@ const AvailableAppointment = ({ selected }) => {
     //      .then(res =>res.json())
     //       .then(data => setAppointmentTime(data))
     // } ,[formattedDate]);
+    
     return (
         <div>
             <p className='text-center text-xl text-secondary mb-5 font-bold'> Available Appointments on : {format(selected, 'PP')} </p>

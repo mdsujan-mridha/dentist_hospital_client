@@ -3,10 +3,12 @@ import auth from '../../../firebase.init';
 import { useSignInWithGoogle, useSignInWithGithub, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { BsGithub } from "react-icons/bs";
 import Loading from '../../../optional/Loading';
+import useToken from '../../../hooks/useToken';
+import { useEffect } from 'react';
 
 const Login = () => {
     // sign in with gmail 
@@ -17,7 +19,7 @@ const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location?.state?.form?.pathname || "/";
+    let from = location?.state?.from?.pathname || "/";
 
     // sign in with email and password 
     const [
@@ -26,22 +28,28 @@ const Login = () => {
         loading2,
         error2,
     ] = useSignInWithEmailAndPassword(auth);
+    const [token] = useToken(user || user1 || user2);
+    
+       // replace after get login 
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate]);
+
     //   handle submit 
     const onSubmit = data => {
-        signInWithEmailAndPassword(data.email,data.password);
+        signInWithEmailAndPassword(data.email, data.password);
         console.log(data)
-        
+
     }
     // handle loading 
     if (loading || loading1 || loading2) {
         return <Loading />
     }
-    // replace after get login 
-     if(user || user1 || user2){
-         navigate(from,{replace: true});
-     }
+ 
     // handle error 
-   let errorElement;
+    let errorElement;
     if (error || error1 || error2) {
         errorElement = <div class="alert alert-error shadow-lg">
             <div>
@@ -102,7 +110,7 @@ const Login = () => {
                                 {errors.password?.type === 'pattern' && <span class="label-text-alt text-red-600 ">{errors.password.message}</span>}
                             </label>
                         </div>
-                       <p className='my-2'>{errorElement}</p>
+                        <p className='my-2'>{errorElement}</p>
                         <input type="submit" value='Login' className='input input-bordered w-full max-w-xs btn btn-primary text-white text-lg font-semibold' />
                     </form>
                     <div className='flex justify-between'>
