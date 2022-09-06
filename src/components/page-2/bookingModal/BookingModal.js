@@ -6,7 +6,7 @@ import Loading from '../../../optional/Loading';
 import {toast } from 'react-toastify';
 
 const BookingModal = ({selected, treatment,setTreatment,refetch }) => {
-    const { _id,name,slots } = treatment;
+    const { _id,name,slots,price } = treatment;
     const[user,loading,error] = useAuthState(auth);
     const formattedDate = format(selected,'PP');
     // note 
@@ -27,6 +27,7 @@ const BookingModal = ({selected, treatment,setTreatment,refetch }) => {
             treatment:name,
             selected:formattedDate,
             getBookingTime,
+            price,
             patientEmail:user?.email,
             patientName:user?.displayName,
             phoneNumber:e.target.value,

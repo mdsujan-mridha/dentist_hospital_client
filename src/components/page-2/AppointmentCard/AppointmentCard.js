@@ -1,6 +1,7 @@
 import React from 'react';
 const AppointmentCard = ({ timeSlot, setTreatment }) => {
-    const { name, slots } = timeSlot;
+    const { name, slots,price } = timeSlot;
+    
     
 
     return (
@@ -19,6 +20,7 @@ const AppointmentCard = ({ timeSlot, setTreatment }) => {
                         }
                     </p>
                     <p className='text-center font-bold'> {slots.length} {slots.length > 1 ? "spaces" : "space"}  available </p>
+                    <p className='text-center text-primary font-bold text-xl'> {price} </p>
                     <div class="card-actions mt-5">
                         <label
                            
